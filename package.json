@@ -63,6 +63,16 @@
         "injectTo": [
           "source.github-actions-workflow"
         ]
+      },
+      {
+        "scopeName": "source.github-actions-workflow.actions-script",
+        "path": "./language/syntaxes/actions-script.tmGrammar.json",
+        "injectTo": [
+          "source.github-actions-workflow"
+        ],
+        "embeddedLanguages": {
+          "source.js": "javascript"
+        }
       }
     ],
     "configuration": {
