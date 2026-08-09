@@ -31,7 +31,8 @@ const RULE_NAMES = {
   jobDefaults: "job.defaults",
   jobDefaultsRun: "job.defaults.run",
   stepsNoDefaultShell: "steps.no-default-shell",
-  step: "step.no-default-shell"
+  step: "step.no-default-shell",
+  stepWith: "step.with"
 };
 
 const MATCH_NOTHING = "^(?!.*)$";
@@ -214,7 +215,23 @@ export async function generateRunGrammar() {
           // us to set the shell for everything that follows it in the step.
           ...languages.map(language => ({include: ref(language.rules.stepShell)})),
 
-          //  Anything else can be handled by the workflow grammar.
+          // Anything else can be handled by the workflow grammar.
+          SYNTAX.anyWorkflowSyntax
+        ]
+      }),
+
+      // Define a rule that matches to a `with` property in a step. This is used
+      // to skip over the inputs for an action so that if there's an input
+      // called `run`, it won't get interpreted as the step's `run` property.
+      ...rule(RULE_NAMES.stepWith, {
+        // Match to a sequence item. This rule is only used
+        // within the `steps` property, so we can guarantee
+        // that any sequence item we match to is a step.
+        ...matchWholeObjectProperty("with", true),
+
+        patterns: [
+          // Let everything be handled by the workflow grammar
+          // so that we don't match an input called `run`.
           SYNTAX.anyWorkflowSyntax
         ]
       }),
@@ -350,6 +367,11 @@ export async function generateRunGrammar() {
             ...matchSequenceItem(),
 
             patterns: [
+              // Match to a `with` property. We match to this first so that an
+              // input in the `with` block called "run" doesn't cause the value of
+              // that input to have the syntax highlighting from the default shell.
+              {include: ref(RULE_NAMES.stepWith)},
+
               // Match to a `shell` property. If we match to this,
               // then the step is overriding the default shell.
               // We need one pattern for each language.

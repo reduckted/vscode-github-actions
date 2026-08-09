@@ -73,6 +73,19 @@
         "embeddedLanguages": {
           "source.js": "javascript"
         }
+      },
+      {
+        "scopeName": "source.github-actions-workflow.run",
+        "path": "./language/syntaxes/run.tmGrammar.json",
+        "injectTo": [
+          "source.github-actions-workflow"
+        ],
+        "embeddedLanguages": {
+          "source.batchfile": "bat",
+          "source.powershell": "powershell",
+          "source.python": "python",
+          "source.shell": "shellscript"
+        }
       }
     ],
     "configuration": {
