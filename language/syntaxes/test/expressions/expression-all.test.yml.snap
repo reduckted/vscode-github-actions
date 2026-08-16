@@ -65,9 +65,9 @@
 #                                                           ^^^^ source.github-actions-workflow meta.embedded.block.github-actions-expression
 #                                                               ^^ source.github-actions-workflow meta.embedded.block.github-actions-expression constant.numeric.github-actions-expression
 #                                                                 ^^^^ source.github-actions-workflow meta.embedded.block.github-actions-expression
-#                                                                     ^^^^ source.github-actions-workflow meta.embedded.block.github-actions-expression variable.other.read.github-actions-expression
+#                                                                     ^^^^ source.github-actions-workflow meta.embedded.block.github-actions-expression constant.language.boolean.github-actions-expression
 #                                                                         ^^^^ source.github-actions-workflow meta.embedded.block.github-actions-expression
-#                                                                             ^^^^ source.github-actions-workflow meta.embedded.block.github-actions-expression variable.other.read.github-actions-expression
+#                                                                             ^^^^ source.github-actions-workflow meta.embedded.block.github-actions-expression constant.language.null.github-actions-expression
 #                                                                                 ^ source.github-actions-workflow meta.embedded.block.github-actions-expression
 #                                                                                  ^^ source.github-actions-workflow meta.embedded.block.github-actions-expression
 >        uses: foo/bar@main
